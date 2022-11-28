@@ -18,3 +18,5 @@ private:
 	Restaurant* m_restaurant;
 	Order* m_order;
 };
+
+void print();

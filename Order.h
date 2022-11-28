@@ -4,21 +4,26 @@
 #include <iostream>
 
 
-enum checkOut{};
-enum deleteDish{};
+
 
 class Order
 {
 public:
 	Order();
-	void showOrder();
+	Order(const Order& source);
 	~Order();
 
+public:
+	bool checkOut();
+	bool deleteDish();
+	void showOrder();
+	Order& operator=(const Order& source);
 private:
-	Dish dishes;
+	Dish* dishes;
 	int totalSum;
 	Address clientAddress;
 	Address restaurantAddress;
+	int numofdish;
 };
 
 

@@ -5,15 +5,18 @@ class Address
 {
 public:
 	Address();
-	int getstreet(){ return Street; };
-	char* getcity() { return City; };
-	void setstreet(int street) { Street = street; };
+	Address(const char* city, int street);
+	Address(const Address& source);
+	Address& operator=(const Address& source);
+	int getstreet(){ return m_Street; };
+	char* getcity() { return m_City; };
+	void setstreet(int street) { m_Street = street; };
 	void setcity(char* city);
 	~Address();
 
 private:
-	int Street;
-	char* City;
+	int m_Street;
+	char* m_City;
 };
 
 

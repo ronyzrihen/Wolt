@@ -6,10 +6,14 @@
 class Restaurant
 {
 public:
-	Restaurant& operator=(const Restaurant& rest);
-	Restaurant(char* name, Address *street, Menu menu);
+	Restaurant(const char* name, Address &street, Dish* dish_list, int size);
 	~Restaurant();
 
+public:
+	Restaurant& operator=(const Restaurant& rest);
+	char* getrest() { return m_name; };
+	int get_menu_size() { return m_menu.getsize(); };
+	char* get_dish_name(int dish) { return m_menu.getdish(dish); };
 private:
 	char* m_name;
 	Address* m_street;
