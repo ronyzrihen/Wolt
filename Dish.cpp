@@ -1,6 +1,9 @@
 #include "Dish.h"
 using namespace std;
 
+ char type0[] = "Appetizer", type1[] = "Main Course", type2[] = "Dessert";
+char* types[] = {type0,type1,type2};
+
 Dish::Dish():
     m_name(NULL),m_type(Appetizer),m_value(-1)
 {
@@ -42,6 +45,10 @@ Dish &Dish::operator=(const Dish &source)
     m_value = source.m_value;
     return *this;
 
+}
+
+char* Dish::getType(){
+return types[m_type];
 }
 
 
