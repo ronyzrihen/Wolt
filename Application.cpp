@@ -17,9 +17,9 @@ Restaurant rest_list[] = { Restaurant("BBB", c2, menu1, 5),Restaurant("Jupanika"
 
 
 
-Application::Application( Client& client)
-:
-m_order(),
+Application::Application(Client& client)
+	:
+m_order(new Order),
 m_restaurant(rest_list)
 {
 	m_client = new Client;
@@ -30,6 +30,21 @@ Application::~Application()
 {
 }
 
+void Application::add_dish(int choice) {
+
+	Dish* menu = m_restaurant->get_menu();
+	m_order->adddish(menu[choice]);
+}
+
+void Application::set_rest(int choice) {
+
+	if (m_order == NULL) {
+		m_order = new Order;
+	}
+
+	m_order->set_rest(m_restaurant[choice]);
+
+}
 void Application::print_rest(){
 cout << "Choose restaurant:\n";
 	for (int i = 0; i < 3; i++)
@@ -39,7 +54,6 @@ cout << "Choose restaurant:\n";
 
 }
 void Application::print_rest_menu(int rest){
-
 	cout << "menu:\n";
 	cout << " " << 0 << ".  " << "return to restaurants\n";
 			for (int j = 0; j < rest_list[rest].get_menu_size(); j++)

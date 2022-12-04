@@ -51,7 +51,8 @@ Menu& Menu::operator=(const Menu& source){
 
 
 Menu::Menu() :
-    m_size(0)
+    m_size(0),
+    m_dishes(NULL)
 {
    
 }

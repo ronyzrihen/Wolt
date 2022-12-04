@@ -11,7 +11,7 @@ Dish::Dish():
 }
 Dish::Dish(const char *name, DishType type, int value)
 {
-    m_name = strdup(name);
+    m_name =  _strdup(name);
     m_type = type;
     m_value = value;
 }
@@ -25,7 +25,7 @@ Dish::Dish(const Dish &source)
     }
     else
     {
-        m_name = strdup(source.m_name);
+        m_name = _strdup(source.m_name);
     }
         m_type = source.m_type;
         m_value = source.m_value;
@@ -33,14 +33,18 @@ Dish::Dish(const Dish &source)
 
 Dish::~Dish()
 {
-    delete[] m_name;
+    if(m_name != NULL)
+        free (m_name);
 }
 
-Dish &Dish::operator=(const Dish &source)
+Dish &Dish::operator=( Dish &source)
 {
 
     if (this == &source){return *this;};
-    m_name = strdup(source.m_name);
+    if(m_name!= NULL)
+        delete[] m_name;
+    m_name = new char[sizeof(source.m_name) + 1];
+    strcpy(m_name, source.m_name);
     m_type = source.m_type;
     m_value = source.m_value;
     return *this;

@@ -12,7 +12,7 @@ Order::Order(const Order &source) {
 
   totalSum = source.totalSum;
   client = source.client;
-  restaurant= source.restaurant;
+  restaurant = source.restaurant;
   numofdish = source.numofdish;
   dishes = new Dish[numofdish];
   if (dishes == NULL) {
@@ -70,18 +70,22 @@ bool Order::deleteDish() {
     return false;
   }
 
+  choice--;
   new_list = new Dish[numofdish - 1];
-  if (new_list){
+  if (new_list == NULL){
 	  cout << "ERROR!\n";
 	  return false;
   }
 
     for (int i = 0, j = 0; i < numofdish; i++, j++) {
 
-      if (i == choice)
+        if (i == choice) {
         i++;
-
-      dishes[i] = new_list[j];
+        if (i == numofdish) {
+            break;
+        }
+      }
+       new_list[j] = dishes[i];
     }
 
   numofdish--;

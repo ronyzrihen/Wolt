@@ -21,6 +21,7 @@ public:
 	void showOrder();
 	void adddish( Dish& new_dish);//finish application first
 	void set_rest(Restaurant& rest) {restaurant = rest;};
+	int get_menu_size() { return restaurant.get_menu_size(); };
 	Order& operator=(const Order& source);
 private:
 	Dish* dishes;

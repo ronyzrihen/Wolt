@@ -30,22 +30,54 @@ int main() {
 	int choice = -1;
 	wolt.print_rest();
 	cin >> choice;
-	switch (choice) {
-	case 1:{
+	while (choice < 1 || choice > 3) {
+		cout << " Choice invalid!\n Try again: ";
+		cin  >> choice;
+	}
+
 		wolt.set_rest(choice -1);
+
 		wolt.print_rest_menu(choice-1);
-		
-		break;
-	}
-	case 2:{
 
-		break;
-	}
-	case 3:{
+		for (;;) {
+		int dish_choice = -1;
+		cout << "1 - Add to order		2 - delete from order\n"
+			<<  "3 - show order			4 - check out\n"
+			<<  "0 - change Restaurant\n";
 
-		break;
-	}
-	}
+		cout << "choose option: ";
+		cin >> dish_choice;
+		while (dish_choice < 0 || dish_choice > 4) {
+			cout << " Choice invalid!\n Try again: ";
+			cin >> dish_choice;
+		}
+
+
+		switch (dish_choice) {
+		case 1: {
+		wolt.print_rest_menu(choice - 1); //fix
+
+		cout << "Choose a dish to add: ";
+		cin >> dish_choice;
+		while (dish_choice < 1 || dish_choice > wolt.get_menu_size()) {
+			cout << " Choice invalid!\n Try again: ";
+			cin >> dish_choice;
+		}
+		wolt.add_dish(dish_choice - 1);
+
+			break;
+		}
+		case 2: {
+
+		wolt.delete_dish();
+
+		return 0;
+		}//case 2
+		}
+
+		}//end of dish
+
+
 
 
 
@@ -58,5 +90,5 @@ int main() {
 
 
 	return 0;
-	}
+	} //end of rest for
 }
