@@ -13,7 +13,7 @@ void Address::setcity(char* city)
 
 Address::Address(const Address& source)
 {
-	m_City = _strdup(source.m_City);
+	m_City = strdup(source.m_City);
 	m_Street = source.m_Street;
 }
 
@@ -21,14 +21,14 @@ Address::Address(const Address& source)
 Address& Address:: operator=(const Address& source) {
 	if (this == &source) return *this;
 	delete[] m_City;
-	m_City = _strdup(source.m_City);
+	m_City = strdup(source.m_City);
 	m_Street = source.m_Street;
 
 	return *this;
 }
 Address::Address(const char* city, int street) {
 	m_Street = street;
-	m_City = _strdup(city);
+	m_City = strdup(city);
 }
 
 Address::Address() {

@@ -1,4 +1,5 @@
 #include "Order.h"
+#include "Dish.h"
 using namespace std;
 
 Order::Order() {
@@ -10,8 +11,8 @@ Order::Order() {
 Order::Order(const Order &source) {
 
   totalSum = source.totalSum;
-  clientAddress = source.clientAddress;
-  restaurantAddress = source.restaurantAddress;
+  client = source.client;
+  restaurant= source.restaurant;
   numofdish = source.numofdish;
   dishes = new Dish[numofdish];
   if (dishes == NULL) {
@@ -35,8 +36,8 @@ Order &Order::operator=(const Order &source) {
   }
 
   totalSum = source.totalSum;
-  clientAddress = source.clientAddress;
-  restaurantAddress = source.restaurantAddress;
+  client= source.client;
+  restaurant = source.restaurant;
 
   return *this;
 }
@@ -97,12 +98,50 @@ return true;
 
 }
 
+
+
+
+
 bool Order::checkOut(){
 
+    cout << client.getname()<<"\n"<<client.getphone() <<"\n"<<client.getcredits()<<endl;
+    cout << restaurant.getrest() << "-" << restaurant.getcity() << " " << restaurant.getstreet() << endl;
+    cout << "total sum: " << totalSum << endl;
+    if (totalSum > client.getcredits())
+    {
+        cout << "You don't have enough credits\n";
+        deleteDish();
 
+    }
 
-
+    return true;
 }
+
+
+void Order::adddish( Dish& new_dish) {
+
+if (dishes == NULL){
+  
+  dishes = new Dish;
+  dishes[0] = new_dish;
+
+}else{
+
+    Dish *new_dishes = new Dish[sizeof(numofdish+1)];
+    for(int i = 0 ; i < numofdish ; i++){
+      new_dishes[i] = dishes[i];
+    }
+    new_dishes[numofdish+1] = new_dish;
+    delete[] dishes;
+    dishes = new_dishes;
+}
+
+    totalSum += new_dish.getvalue();
+    numofdish++;
+
+    cout << new_dish.getname() << " was added!\n";
+}
+
 
 
 Order::~Order() { delete[] dishes; }

@@ -1,7 +1,9 @@
 #pragma once
-#include "Address.h"
+#include "Client.h"
+#include "Restaurant.h"
 #include "Dish.h"
 #include <iostream>
+#include <string.h>
 
 
 
@@ -17,12 +19,14 @@ public:
 	bool checkOut();
 	bool deleteDish();
 	void showOrder();
+	void adddish( Dish& new_dish);//finish application first
+	void set_rest(Restaurant& rest) {restaurant = rest;};
 	Order& operator=(const Order& source);
 private:
 	Dish* dishes;
 	int totalSum;
-	Address clientAddress;
-	Address restaurantAddress;
+	Client client;
+	Restaurant restaurant;
 	int numofdish;
 };
 

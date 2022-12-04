@@ -4,12 +4,15 @@
 class Client
 {
 public:
-	//Client() {};
+	Client() ;
 	Client(char* name, char* phonenumber, Address& homeaddres);
 	Client(const Client& source);
 	~Client();
 public:
 	Client& operator=(const Client& source);
+	char* getname() { return m_Name; };
+	char* getphone() { return m_PhoneNumber; };
+	int getcredits() { return m_Credits; };
 private:
 	char* m_Name;
 	char* m_PhoneNumber;

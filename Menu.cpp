@@ -48,3 +48,10 @@ Menu& Menu::operator=(const Menu& source){
 
     return *this;
 }
+
+
+Menu::Menu() :
+    m_size(0)
+{
+   
+}

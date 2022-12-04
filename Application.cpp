@@ -17,31 +17,88 @@ Restaurant rest_list[] = { Restaurant("BBB", c2, menu1, 5),Restaurant("Jupanika"
 
 
 
-Application::Application(Restaurant* rest_list, Client* client)
+Application::Application( Client& client)
 :
-m_client(client),
-m_restaurant(rest_list),
-m_order()
+m_order(),
+m_restaurant(rest_list)
 {
-
+	m_client = new Client;
+	*m_client = client;
 }
 
 Application::~Application()
 {
 }
 
-
-
-void print() {
-
+void Application::print_rest(){
+cout << "Choose restaurant:\n";
 	for (int i = 0; i < 3; i++)
 	{
-		cout << rest_list[i].getrest()<<endl<<"Menu:\n";
+		cout << i+1 << " - " << rest_list[i].getrest() << endl;
+	}
 
-		for (int j = 0; j < rest_list[i].get_menu_size(); j++)
+}
+void Application::print_rest_menu(int rest){
+
+	cout << "menu:\n";
+	cout << " " << 0 << ".  " << "return to restaurants\n";
+			for (int j = 0; j < rest_list[rest].get_menu_size(); j++)
+			{
+				cout << " " << j + 1 << ".  " << rest_list[rest].get_dish_name(j) << "-" << rest_list[rest].get_dish_price(j) << " NIS" << endl;
+			}
+			cout << "====================================\n";
+
+}
+
+void print(Order&order) {
+	int num=0;
+	cout << "Choose restaurant:\n";
+	for (int i = 0; i < 3; i++)
+	{
+		cout << i << " - " << rest_list[i].getrest() << endl;
+	}
+	cin >> num;
+	switch (num)
+	{
+	case 0: {
+		cout << "menu:\n";
+			for (int j = 0; j < rest_list[0].get_menu_size(); j++)
+			{
+				cout << " " << j + 1 << ".  " << rest_list[0].get_dish_name(j) << "-" << rest_list[0].get_dish_price(j) << " NIS" << endl;
+			}
+			cout << "====================================\n";
+			break;
+		}
+	case 1:
+	{
+		int choose = -1;
+		cout << "menu:\n";
+		for (int j = 0; j < rest_list[1].get_menu_size(); j++)
 		{
-			cout << " " << j + 1 << ".  " << rest_list[i].get_dish_name(j)<<endl;
+			cout << " " << j + 1 << ".  " << rest_list[1].get_dish_name(j) << "-" << rest_list[1].get_dish_price(j) << " NIS" << endl;
 		}
 		cout << "====================================\n";
+		cout << "choose dish:";
+		cin >> choose;
+		//order.adddish(rest_list[1]);
+		/*order.showOrder();*/
+		break;
+	}
+	case 2:
+		cout << "menu:\n";
+	{
+		for (int j = 0; j < rest_list[2].get_menu_size(); j++)
+		{
+			cout << " " << j + 1 << ".  " << rest_list[2].get_dish_name(j) << "-" << rest_list[2].get_dish_price(j) << " NIS" << endl;
+		}
+		cout << "====================================\n";
+		break;
+	}
+
+
+	default:
+		break;
 	}
 }
+
+	
