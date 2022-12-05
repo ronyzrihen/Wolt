@@ -11,7 +11,7 @@ Dish::Dish():
 }
 Dish::Dish(const char *name, DishType type, int value)
 {
-    m_name =  _strdup(name);
+    m_name =  strdup(name);
     m_type = type;
     m_value = value;
 }
@@ -25,7 +25,7 @@ Dish::Dish(const Dish &source)
     }
     else
     {
-        m_name = _strdup(source.m_name);
+        m_name = strdup(source.m_name);
     }
         m_type = source.m_type;
         m_value = source.m_value;

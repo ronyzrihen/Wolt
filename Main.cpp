@@ -34,9 +34,13 @@ int main() {
 		cout << " Choice invalid!\n Try again: ";
 		cin  >> choice;
 	}
+        if (wolt.is_same_city(choice-1)){
+            cout << "Restaurant is in a different city!\n";
+            continue;
+        }
 
-		wolt.set_rest(choice -1);
 
+        wolt.set_rest(choice -1);
 		wolt.print_rest_menu(choice-1);
 
 		for (;;) {
@@ -71,8 +75,19 @@ int main() {
 
 		wolt.delete_dish();
 
-		return 0;
+		break;
 		}//case 2
+
+        case 3:{
+            wolt.show_order();
+            break;
+        }// case 3
+        case 4: {
+
+            wolt.check_out();
+
+            break;
+        }//case 4
 		}
 
 		}//end of dish

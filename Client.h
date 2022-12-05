@@ -13,6 +13,10 @@ public:
 	char* getname() { return m_Name; };
 	char* getphone() { return m_PhoneNumber; };
 	int getcredits() { return m_Credits; };
+    int get_street(){return m_HomeAddres.getstreet();};
+    char* get_city(){return m_HomeAddres.getcity();};
+
+    void set_credits(int num){m_Credits += num;};
 private:
 	char* m_Name;
 	char* m_PhoneNumber;

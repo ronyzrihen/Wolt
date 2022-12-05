@@ -12,7 +12,7 @@ public:
 
 public:
 	Restaurant& operator=( const Restaurant& rest);
-	char* getrest() { return m_name; };
+    char* getrest() { return m_name; };
 	int get_menu_size() { return m_menu.getsize(); };
 	char* get_dish_name(int dish) { return m_menu.getdish(dish); };
 	int get_dish_price(int dish) { return m_menu.getprice(dish); };

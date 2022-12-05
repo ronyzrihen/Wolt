@@ -9,7 +9,7 @@ using namespace std;
 
 Dish Berger("Hamburger",MainCourse,70), Steak("Steak",MainCourse,5), Pasta("Pasta",MainCourse,5),Pizza("Pizza",MainCourse,5),Salad("Salad",Appetizer,5),Sushi("Sushi",MainCourse,5),Sufle("Sufle",Dessert,5),Banana_loti("Banana loti",Dessert,5),Crack_Pie("Crack Pie",Dessert,5);
 
-Dish menu1[] = {Salad,Steak,Crack_Pie,Banana_loti,Sufle};
+Dish menu1[] = {Salad,Steak,Crack_Pie,Banana_loti,Sufle};//todo change prices
 Dish menu2[] = {Salad,Pasta,Pizza,Banana_loti,Sufle};
 Dish menu3[] = {Salad,Sushi,Sufle,Banana_loti,Sufle};
 Address c1("Afula", 100),c2("Tel-Aviv",77),c3("Ramat-Gan",80);
@@ -19,15 +19,24 @@ Restaurant rest_list[] = { Restaurant("BBB", c2, menu1, 5),Restaurant("Jupanika"
 
 Application::Application(Client& client)
 	:
-m_order(new Order),
+m_order(new Order(client)),
 m_restaurant(rest_list)
 {
 	m_client = new Client;
 	*m_client = client;
+
 }
 
 Application::~Application()
 {
+}
+
+bool Application::is_same_city(int rest){
+
+    if(!strcmp(m_order->get_client_city(),m_restaurant[rest].getcity()))
+        return false;
+
+    return true;
 }
 
 void Application::add_dish(int choice) {
