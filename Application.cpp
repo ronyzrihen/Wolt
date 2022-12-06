@@ -1,27 +1,22 @@
 #include <iostream>
 #include "Application.h"
 #include "Dish.h"
+#define NUM_OF_REST 6
 using namespace std;
 
-
-
-
-
-Dish Berger("Hamburger",MainCourse,70), Steak("Steak",MainCourse,5), Pasta("Pasta",MainCourse,5),Pizza("Pizza",MainCourse,5),Salad("Salad",Appetizer,5),Sushi("Sushi",MainCourse,5),Sufle("Sufle",Dessert,5),Banana_loti("Banana loti",Dessert,5),Crack_Pie("Crack Pie",Dessert,5);
-
-Dish menu1[] = {Salad,Steak,Crack_Pie,Banana_loti,Sufle};//todo change prices
-Dish menu2[] = {Salad,Pasta,Pizza,Banana_loti,Sufle};
-Dish menu3[] = {Salad,Sushi,Sufle,Banana_loti,Sufle};
-Address c1("Afula", 100),c2("Tel-Aviv",77),c3("Ramat-Gan",80);
-Restaurant rest_list[] = { Restaurant("BBB", c2, menu1, 5),Restaurant("Jupanika", c1, menu3, 5), Restaurant("Vivino", c3, menu2, 5)};
-
-
-
-Application::Application(Client& client)
+Application::Application(Client& client, Restaurant* rest_list, int rest_size )
 	:
-m_order(new Order(client)),
-m_restaurant(rest_list)
+m_order(new Order(client))
+
 {
+    m_restaurant = new Restaurant[rest_size];
+    if(m_restaurant == NULL){
+        cout << "ERROR!\n";
+        m_restaurant = NULL;
+    }
+    for (int i = 0 ; i < rest_size ; i++){
+        m_restaurant[i] = rest_list[i];
+    }
 	m_client = new Client;
 	*m_client = client;
 
@@ -41,7 +36,7 @@ bool Application::is_same_city(int rest){
 
 void Application::add_dish(int choice) {
 
-	Dish* menu = m_restaurant->get_menu();
+	Dish* menu = m_order->get_menu();
 	m_order->adddish(menu[choice]);
 }
 
@@ -54,26 +49,20 @@ void Application::set_rest(int choice) {
 	m_order->set_rest(m_restaurant[choice]);
 
 }
-void Application::print_rest(){
+void Application::print_rest(Restaurant* rest_list){
 cout << "Choose restaurant:\n";
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < NUM_OF_REST; i++)
 	{
-		cout << i+1 << " - " << rest_list[i].getrest() << endl;
+		cout << i+1 << " - " << rest_list[i].getrest() << " - " << rest_list[i].getcity() << endl;
 	}
 
 }
 void Application::print_rest_menu(int rest){
 	cout << "menu:\n";
-	cout << " " << 0 << ".  " << "return to restaurants\n";
-			for (int j = 0; j < rest_list[rest].get_menu_size(); j++)
-			{
-				cout << " " << j + 1 << ".  " << rest_list[rest].get_dish_name(j) << "-" << rest_list[rest].get_dish_price(j) << " NIS" << endl;
-			}
-			cout << "====================================\n";
-
+    Print_menu_by_type();
 }
 
-void print(Order&order) {
+void print(Order&order, Restaurant*& rest_list) {
 	int num=0;
 	cout << "Choose restaurant:\n";
 	for (int i = 0; i < 3; i++)

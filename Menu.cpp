@@ -56,3 +56,31 @@ Menu::Menu() :
 {
    
 }
+
+void Menu:: Print_menu_by_type(){
+
+    cout <<  "\nAppetizers\n~~~~~~~~~~\n";
+    for (int i = 0 ; i < m_size ; i++){
+        if(m_dishes[i].get_int_Type() == Appetizer){
+            cout << "    " << i + 1 << ".  " << m_dishes[i].getname() << "-" << m_dishes[i].getvalue() << " NIS" << endl;
+        }
+
+    }
+    cout << "-------------------------------\n";
+    cout <<  "\nMain - Course\n~~~~~~~~~~~~~\n";
+    for (int i = 0 ; i < m_size ; i++){
+        if(m_dishes[i].get_int_Type() == MainCourse){
+            cout << "    " << i + 1 << ".  " << m_dishes[i].getname() << "-" << m_dishes[i].getvalue() << " NIS" << endl;
+        }
+
+    }
+    cout << "-------------------------------\n";
+    cout <<  "\nDessert\n~~~~~~~\n";
+    for (int i = 0 ; i < m_size ; i++){
+        if(m_dishes[i].get_int_Type() == Dessert){
+            cout << "    " << i + 1 << ".  " << m_dishes[i].getname() << "-" << m_dishes[i].getvalue() << " NIS" << endl;
+        }
+
+    }
+    cout << "-------------------------------\n";
+}

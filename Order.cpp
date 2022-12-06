@@ -40,7 +40,7 @@ Order &Order::operator=(const Order &source) {
     numofdish = source.numofdish;
   }
   for (int i = 0; i < numofdish; i++) {
-      *(dishes+i) = *(source.dishes+i); //todo check if works
+      *(dishes+i) = *(source.dishes+i);
   }
 
   totalSum = source.totalSum;
@@ -57,6 +57,18 @@ void Order::showOrder() {
          << dishes[i]->getvalue() <<"NIS		 " << dishes[i]->getType() << endl;
   }
   cout << "===========================\n";
+}
+void Order::delete_order(){
+
+    for (int i = 0 ; i < numofdish ; i++){
+        delete *(dishes + i);
+    }
+    if(dishes != NULL)
+        delete[] dishes;
+
+    dishes = NULL;
+    numofdish = 0;
+    totalSum = 0;
 }
 
 bool Order::deleteDish() {
@@ -141,12 +153,11 @@ bool Order::checkOut(){
     if (out == 2){
         cout << "Returning to order\n";
         return false;
-    } else if(out == 1 ){
+    }
         client.set_credits(-totalSum);
         cout << "Your balance is now:" << client.getcredits() << endl
         << "Your delivery will arrive in:" << get_ETA() << " MINUTS\n";
         delete[] dishes;
-    }
 
     return true;
 }
@@ -154,13 +165,11 @@ bool Order::checkOut(){
 
 void Order::adddish( Dish& new_dish) {
     Dish **new_dishes = NULL;
-    Dish *dish = new Dish;
-    *dish = new_dish;
+    Dish *dish = new Dish(new_dish);
 if (dishes == NULL){
 
   dishes = new Dish*;
-  *dishes = new Dish;
-  *dishes = dish;
+  *dishes = new Dish(new_dish);
 
 }else{
 
@@ -168,11 +177,6 @@ if (dishes == NULL){
     memcpy(new_dishes,dishes,numofdish*sizeof(Dish*));
     *(new_dishes+numofdish) = dish;
 
- /*
-    for(int i = 0 ; i < numofdish ; i++){
-      new_dishes[i] = dishes[i];
-    }
-    new_dishes[numofdish+1] = new_dish;*/
     delete dishes;
     dishes = new_dishes;
 }
@@ -185,4 +189,11 @@ if (dishes == NULL){
 
 
 
-Order::~Order() { delete[] dishes; }
+Order::~Order() {
+
+
+for (int i = 0 ; i < numofdish ; i++){
+    delete *(dishes + i);
+}
+    delete[] dishes;
+}

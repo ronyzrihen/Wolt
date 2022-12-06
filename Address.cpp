@@ -3,14 +3,6 @@
 #include <string.h>
 
 
-void Address::setcity(char* city)
-{
-	if (city == NULL) {
-		return;
-	}
-	strcpy(m_City, city);
-}
-
 Address::Address(const Address& source)
 {
 	m_City = strdup(source.m_City);

@@ -16,6 +16,7 @@ public:
 
 	Dish& operator=( Dish& source);
 	char* getType();
+    DishType get_int_Type(){return m_type;};
 	char* getname() { return m_name; };
 	int getvalue() { return m_value; };
 private:

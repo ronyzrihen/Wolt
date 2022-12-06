@@ -18,8 +18,8 @@ public:
 	int get_dish_price(int dish) { return m_menu.getprice(dish); };
 	int getstreet() { return m_street->getstreet(); };
 	char* getcity() { return m_street->getcity(); };
-
-	Dish* get_menu() { return m_menu.get_menu(); };
+    void print_menu() {m_menu.Print_menu_by_type();};
+	Dish*& get_menu() { return m_menu.get_menu(); };
 private:
 	char* m_name;
 	Address* m_street;
